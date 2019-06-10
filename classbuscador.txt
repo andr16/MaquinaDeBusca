@@ -1,0 +1,37 @@
+classe 
+
+
+Gerar vetor da frase pesquisada(sepa o contrutor){
+-gera um vetor qi
+-
+}
+
+calcula idf{
+-passa por todos documentos e acha nt(número de documentos onde a palavra apareceu)
+joga na seguinte formula -> double idf = log(11314/3);
+}
+
+
+calcula tf{
+vezes que uma palavra aparece dentro de um documento
+}
+
+gera um vetor para documento{
+ W (dj,Pt) = t f (dj,Pt)×i d f (Pt)
+Onde, w(dj,Pt) é a coordenada do documento dj no eixo Pt
+t f (dj,Pt) é a frequência da palavra Pt no documento dj
+i d f (Pt) é a importância de Pt na coleção
+}
+
+calcula coseno entre dj e qi {
+....
+cos(?) =Pt
+i=1
+(W (dj,Pi)×W (q,Pi))
+qP
+i W (dj,Pi)
+2 ×
+pP
+i W (q,Pi)
+2
+}
