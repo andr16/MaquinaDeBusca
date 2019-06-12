@@ -8,44 +8,27 @@
 #include <map>
 #include <set>
 #include <sstream>
+#include "indiceInvertido.h"
 using namespace std;
 
 int main() {
-	set<string> s;
 
-	map<string, set<string>> data;
-	set<string> rak;
-	string a;
+	string h;
+	IndiceInvertido objetoGeral;
+	cout << "pesquise uma palavra: " << endl;
+	cin >> h;
 
-	for (int p = 1; p <= 5; p++) {
-		ifstream inFile;
-		
-		inFile.open("C:\\Users\\André\\Documents\\UFMG\\PDS II\\" + to_string(p) + ".txt");
-		if (!inFile) {
-			cerr << "O arquivo" + to_string(p) + " nao foi aberto";
-			exit(1);
-		}
-
-		while (inFile >> a) { // loop para eliminar simbolos e letras maiusculas das palavras do arquivo
-
-			for (int i = 0; a[i] != '\0'; i++) {
-				a[i] = tolower(a[i]);
-				a.erase(remove_if(a.begin(), a.end(), [](char c) { return !isalpha(c) && !isdigit(c); }), a.end());
-				rak.insert(to_string(p));
-			}
-			//cout << a << ' ';
-			data[a] = rak;
-		}
-		inFile.close();
-	}
-
-	for (map<string, set<string> >::iterator it = data.begin(); it != data.end(); it++) {
+	objetoGeral.ler_inserir_Arquivos();
+	//objetoGeral.imprimirIndice();
+	objetoGeral.frequencia(h);
+	
+	/*
+	for (map<string, set<string> >::iterator it = mapa.begin(); it != mapa.end(); it++) {
 		cout << "\n\nchave: " << it->first << endl;
 	}
 
-	for (set<string>::iterator o = rak.begin(); o != rak.end(); o++) {
+	for (set<string>::iterator o = docs.begin(); o != docs.end(); o++) {
 		cout << "\n\nvalor: " << *o << endl;
 	}
-
-
+	*/
 }
