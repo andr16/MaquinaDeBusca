@@ -1,7 +1,9 @@
 #include <iostream>
 #include <fstream>
 #include <algorithm>
+#include<math.h>
 #include "indiceInvertido.h"
+
 using namespace std;
 
 BaseDados::BaseDados() {}
@@ -40,6 +42,7 @@ int BaseDados::ocorrenciasArquivo(string palavra, string documento) {
 		for (int i = 0; palavra_no_arq[i] != '\0'; i++) { // Loop para eliminar simbolos e letras maiusculas das palavras do arquivo
 			palavra_no_arq[i] = tolower(palavra_no_arq[i]);
 			palavra_no_arq.erase(remove_if(palavra_no_arq.begin(), palavra_no_arq.end(), [](char c) { return !isalpha(c) && !isdigit(c); }), palavra_no_arq.end());
+			
 		}
 		if (palavra == palavra_no_arq) {
 			contador++;
@@ -75,11 +78,10 @@ bool BaseDados::pertence(string palavra) {
 	return (mapa.find(palavra) != mapa.end());
 }
 
-map<string, int> BaseDados::frequencia(string palavra) {
-	BaseDados objeto;
+map<string, int> BaseDados::frequencia(string palavra) { //calculo do tf
 	set<string> arquivos;
 	
-	if (objeto.pertence(palavra)); {
+	if (this->pertence(palavra)); {
 		arquivos = mapa[palavra];
 	}
 
@@ -88,8 +90,53 @@ map<string, int> BaseDados::frequencia(string palavra) {
 	map<string, int>::iterator it_tf;
 
 	for (it_arqs = arquivos.begin(); it_arqs != arquivos.end(); it_arqs++) {
-		tf[*it_arqs] = objeto.ocorrenciasArquivo(palavra, *it_arqs);
+		tf[*it_arqs] = this->ocorrenciasArquivo(palavra, *it_arqs);
 	}
 
 	return tf;
 }
+
+
+double BaseDados::importancia(string palavra) {
+	double idf;
+	idf= log(NUMERO_DOCUMENTOS / numeroArquivo(palavra));	
+	return idf;
+}
+
+double BaseDados::calcularIdf(string palavra) {
+	return log(NUMERO_DOCUMENTOS / numeroArquivo(palavra));;
+}
+
+map<int, double> BaseDados::hash() {
+	int numeroPalavra=50000;
+	vector<string> = nomeDocumentos;
+	map<int, double>aux;
+	auto iAux = aux.begin();
+	vector<string>::iterator i;//iterator referente ao vector com nome dos documentos
+
+	for (auto it = mapa.begin(), int x ; it != mapa.end();it++,x++){ // Avanca o map<string,set<string> 
+		string palavra = it->first;
+		map<string, int> resultado = frequencia(it->first);
+		auto docFrequencia = resultado.begin(); //Mapa (doc,frequencia)
+		for(i = nomeDocumentos.begin(); != nomeDocumentos.end();i++){
+			int valorVetor = atoi(i->c_str());
+			int valorMap = atoi(x->first->c_str());
+		if((valorVetor == valorMap ) {
+			iAux->fist = x*numeroPalavra + valorVetor;
+			int tf = ocorrenciasArquivo(palavra,*i);
+			iAux->second = importancia(palavra)*tf;//pegar valor frequencia e botar idf
+		}
+		else { 
+			iAux->fist = x*numeroPalavra + valorVetor;
+				iAux->second = 0;
+		}
+	}
+	
+	
+	return aux;
+}
+
+
+
+
+

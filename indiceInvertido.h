@@ -1,9 +1,11 @@
 #ifndef INDICEINVERTIDO_H
 #define INDICEINVERTIDO_H
 
+const NUMERO_DOCUMENTOS= 5;
 #include <string>
 #include <map>
 #include <set>
+#include <math.h>
 
 using namespace std;
 
@@ -32,9 +34,24 @@ public:
 	// Pre-condicao: a palavra deve pertencer a algum arquivo
 	map<string, int> frequencia(string palavra);
 
+	//Calcula itf de varias palavras
+	map<double,string> importancia(vector<string> pesquisa);
+
+	//Calcula tf de apenas uma palavra
+	int calcularTf(string palavra );
+
+	//calcula itf de apenas uma palavra
+	double calcularIdf(string palavra);
+	//Cria sistema de coordenada por funcao hash
+	map<int, double> hash();
+	//
+	
+	
+	
 private:
 	map<string, set<string>> mapa; // Mapa que representa o indice invertido
-	string palavra; // Palavras dos arquivos 
+	string palavra; // Palavras dos arquivos
+
 };
 
 #endif  // INDICEINVERTIDO_H

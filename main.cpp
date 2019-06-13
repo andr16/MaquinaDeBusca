@@ -14,7 +14,7 @@ using namespace std;
 int main() {
 
 	string h;
-	IndiceInvertido objetoGeral;
+	BaseDados objetoGeral;
 	cout << "pesquise uma palavra: " << endl;
 	cin >> h;
 
