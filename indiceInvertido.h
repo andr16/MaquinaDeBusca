@@ -1,30 +1,31 @@
 #ifndef INDICEINVERTIDO_H
 #define INDICEINVERTIDO_H
 
-const NUMERO_DOCUMENTOS= 5;
 #include <string>
 #include <map>
 #include <set>
+#include <vector>
 #include <math.h>
+const int NUMERO_DOCUMENTOS = 5;
 
 using namespace std;
 
 class BaseDados {
 public:
-	// Cria um indice invertido vazio
+	// Construtor da classe
 	BaseDados();
 
 	// Insere a palavra e o documento no map de acordo com o indice invertido
 	void inserir(string palavra, string documento);
+
+	// Le os arquivos e insere as palavras no indice invertido
+	void ler_inserir_Arquivos();
 
 	// Imprime o indice invertido
 	void imprimirIndice();
 
 	// Le o documento e retorna o numero de vezes que a palavra ocorre nele
 	int ocorrenciasArquivo(string palavra, string documento);
-
-	// Le cada arquivo, trata as palavras e as insere no indice
-	void ler_inserir_Arquivos();
 
 	// Retorna se a palavra pertence a algum arquivo
 	bool pertence(string palavra);
@@ -33,25 +34,31 @@ public:
 	// onde ela aparece e o numero de vezes que ela se repete.
 	// Pre-condicao: a palavra deve pertencer a algum arquivo
 	map<string, int> frequencia(string palavra);
+	
+	// Retorna o numero de arquivos em que a palavra aparece
+	int numeroArquivos(string palavra);
 
-	//Calcula itf de varias palavras
-	map<double,string> importancia(vector<string> pesquisa);
 
-	//Calcula tf de apenas uma palavra
-	int calcularTf(string palavra );
+	// ------------------------------------------------------
 
-	//calcula itf de apenas uma palavra
+
+	// Calcula idf de apenas uma palavra
 	double calcularIdf(string palavra);
-	//Cria sistema de coordenada por funcao hash
-	map<int, double> hash();
-	//
-	
-	
-	
+
+	// Cria sistema de coordenada por funcao hash
+    //map<int, double> hash();
+
+	// Funcao de entrada
+	string entrada();
+
+	// Testa se palavra pertence a documento
+	bool existe(string palavra, string documento);
+
 private:
 	map<string, set<string>> mapa; // Mapa que representa o indice invertido
-	string palavra; // Palavras dos arquivos
-
+	vector<string> nomeDocumentos;
+	map<int, double> coordenadas;
+	friend class Teste;
 };
 
 #endif  // INDICEINVERTIDO_H
